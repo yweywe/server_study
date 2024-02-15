@@ -5,9 +5,9 @@ services:
   fe:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
     restart: always
-    command: npm start
+    command: npm run start
     container_name: fe
     ports: 
-      - 443:3000
+      - 80:3000
