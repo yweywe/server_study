@@ -1,0 +1,6 @@
+FROM node:20.11.0-alpine
+WORKDIR /server_study/fe
+COPY package.json package-lock.json ./
+RUN npm install
+COPY . ./
+EXPOSE 3000
