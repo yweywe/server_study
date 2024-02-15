@@ -5,6 +5,9 @@ services:
   fe:
     build:
       context: ./frontend
+      dockerfile: Dockerfile
     restart: always
+    command: npm start
+    container_name: fe
     ports: 
       - 443:3000
