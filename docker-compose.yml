@@ -1,0 +1,10 @@
+# docker-compose.yml
+
+version: '3.5'
+services:
+  fe:
+    build:
+      context: ./frontend
+    restart: always
+    ports: 
+      - 443:3000
