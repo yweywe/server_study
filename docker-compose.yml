@@ -2,12 +2,30 @@
 
 version: '3.5'
 services:
+  nginx:
+    container_name: nginx-proxy
+    image: nginx:latest
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - fe
+    networks:
+      - my-net
   fe:
+    container_name: fe
     build:
       context: ./frontend
       dockerfile: dockerfile
     restart: always
     command: npm run start
-    container_name: fe
-    ports: 
-      - 80:3000
+    expose: 
+      - 3000
+    networks:
+      - my-net
+
+networks:
+  my-net:
+    driver: bridge
