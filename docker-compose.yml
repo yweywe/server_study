@@ -1,18 +1,22 @@
 # docker-compose.yml
+# nginx, frontend, backend, database
+# nginx, react, fastapi, postgresql
 
 version: '3.5'
 services:
   nginx:
-    container_name: nginx-proxy
+    container_name: np
     image: nginx:latest
     restart: always
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - fe
+      # - be
+      # - db
     networks:
       - my-net
   fe:
@@ -26,6 +30,34 @@ services:
       - 3000
     networks:
       - my-net
+  # be:
+  #   container_name: be
+  #   image: fastapi
+  #   build:
+  #     context: ./backend
+  #     dockerfile: dockerfile
+  #   restart: always
+  #   command: uvicorn main:app --reload 
+  #   expose:
+  #     - 8080
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - my-net
+  # db:
+  #   container_name: db
+  #   image: postgres:latest
+  #   restart: always
+  #   volumes:
+  #     - ./database:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRE_USER: postgres
+  #     - POSTGRES_PASSWORD: postgres
+  #     - POSTGRES_DB: postgres
+  #   expose:
+  #     - 3306
+  #   networks:
+  #     - my-net
 
 networks:
   my-net:
