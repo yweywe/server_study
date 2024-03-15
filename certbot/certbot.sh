@@ -1,0 +1,1 @@
+docker-compowe run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d example.org
