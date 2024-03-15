@@ -3,5 +3,6 @@ WORKDIR /server_study/fe
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . ./
+RUN npx next telemetry disable
 RUN npm run build
 EXPOSE 3000
